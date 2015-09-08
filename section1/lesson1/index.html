@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <title>Data Binding</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container" ng-init="name='';">
+        <h3>
+            hi, what's your name?<br/>
+            my name is <strong>{{ name }}</strong>
+        </h3>
+
+        <input  type="text"
+                    class="form-control"
+                    ng-model="name"
+                    placeholder="Name"/>
+    </div>
+<script src="../libs/angular/angular.min.js"></script>
+</body>
+</html>
