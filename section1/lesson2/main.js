@@ -1,6 +1,6 @@
-var app = angular.module('minmax', []);
+var app = angular.module('application', []);
 
-app.controller('MinMaxCtrl', function ($scope) {
+app.controller('FormController', function ($scope) {
     $scope.formModel = {};
 
     $scope.Submit = function () {
