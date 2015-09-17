@@ -14,7 +14,7 @@ app.controller('FormController', function ($scope, $http) {
     $scope.formModel = {};
 
     $scope.Submit = function () {
-            console.log("Hey i'm submitted!");
-            console.log($scope.formModel);
+        console.log("Hey i'm submitted!");
+        console.log($scope.formModel);
     };
 });
