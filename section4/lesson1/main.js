@@ -4,7 +4,7 @@ app.controller('PersonDetailController', function ($scope)  {
 
 });
 
-app.controller('PersonListController', function ($scope) {
+app.controller('PersonListController', function ($scope, $rootScope) {
 
     $scope.search = "";
     $scope.order = "email";
@@ -13,7 +13,7 @@ app.controller('PersonListController', function ($scope) {
 
     $scope.selectPerson = function (person, index) {
         $scope.selectedIndex = index;
-        $scope.selectedPerson = person;
+        $rootScope.selectedPerson = person;
     };
 
     $scope.sensitiveSearch = function(person) {
