@@ -1,5 +1,6 @@
 var app = angular.module('application', [
-    'ngResource'
+    'ngResource',
+    'infinite-scroll'
 ]);
 
 app.config(function($httpProvider, $resourceProvider) {
@@ -21,10 +22,14 @@ app.controller('PersonListController', function ($scope, ContactService) {
     $scope.order = "email";
     $scope.contacts = ContactService;
 
+    $scope.loadMore = function () {
+        console.log("Load more!");
+    };
+
     $scope.sensitiveSearch = function(person) {
         if ($scope.search) {
             return person.name.indexOf($scope.search) === 0 ||
-                       person.email.indexOf($scope.search) === 0;
+                      person.email.indexOf($scope.search) === 0;
         }
         return true;
     };
