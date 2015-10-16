@@ -44,7 +44,10 @@
 
                         </form>
 
-                        <table class="table table-bordered" infinite-scroll="loadMore()" infinite-scroll-distance="1">
+                        <table class="table table-bordered"
+                                     infinite-scroll="loadMore()"
+                                     infinite-scroll-immediate-check="false"
+                                     infinite-scroll-distance="1">
 
                             <tr>
                                 <th>#</th>
@@ -59,7 +62,7 @@
                                 <th>Birthday</th>
                             </tr>
 
-                            <tr ng-repeat="person in filteredPersons = (contacts.persons | filter:sensitiveSearch | orderBy:order)"
+                            <tr ng-repeat="person in contacts.persons"
                                 ng-style="{ 'background-color': person.email === contacts.selectedPerson.email ? 'lightgray' : '' }"
                                 ng-click="contacts.selectedPerson = person">
                                 <td>{{ $index + 1 }}</td>
@@ -67,7 +70,7 @@
                                 <td>{{ person.email }}</td>
                                 <td>{{ person.birthdate | date:"longDate" }}</td>
                             </tr>
-                            <tr ng-show="filteredPersons.length === 0">
+                            <tr ng-show="contacts.persons.length === 0">
                                 <td colspan="4">
                                     <div class="alert alert-info">
                                         <p class="text-center">No results found for search term '{{ search }}'</p>
