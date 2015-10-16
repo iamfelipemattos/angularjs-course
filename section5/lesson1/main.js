@@ -27,13 +27,9 @@ app.controller('PersonListController', function ($scope, ContactService) {
         $scope.contacts.loadMore();
     };
 
-    $scope.sensitiveSearch = function(person) {
-        if ($scope.search) {
-            return person.name.indexOf($scope.search) === 0 ||
-                      person.email.indexOf($scope.search) === 0;
-        }
-        return true;
-    };
+    $scope.$watch('search', function (newVal, oldVal) {
+        console.log(newVal);
+    })
 
 });
 
