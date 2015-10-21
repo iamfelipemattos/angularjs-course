@@ -80,6 +80,12 @@
 
                         </table>
 
+                        <div class="spinner" ng-show="contacts.isLoading">
+                            <span us-spinner="{ radius: 8, width: 5, length: 3, lines: 9 }"></span>
+
+                            <p>Loading...</p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -116,6 +122,8 @@
     <script src="../libs/angular/angular.min.js"></script>
     <script src="../libs/angular-resource/angular-resource.min.js"></script>
     <script src="../libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+    <script src="../libs/spin.js/spin.js"></script>
+    <script src="../libs/angular-spinner/angular-spinner.min.js"></script>
     <script src="main.js"></script>
 
 </body>
