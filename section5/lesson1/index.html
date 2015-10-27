@@ -2,8 +2,12 @@
 <html lang="en" ng-app="application">
 <head>
     <title>Contacts</title>
-    <link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="main.css" rel="stylesheet">
+    <link href="../libs/bootstrap/dist/css/bootstrap.min.css"
+              rel="stylesheet">
+    <link href="../libs/ladda/dist/ladda-themeless.min.css"
+              rel="stylesheet">
+    <link href="main.css"
+              rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -94,24 +98,105 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Details</div>
                     <div class="panel-body">
-
-                        <dl>
-                            <dt>Name</dt>
-                            <dd>{{ contacts.selectedPerson.name }}</dd>
-                            <dt>Email</dt>
-                            <dd>{{ contacts.selectedPerson.email }}</dd>
-                            <dt>Birthday</dt>
-                            <dd>{{ contacts.selectedPerson.birthdate | date:"longDate" }}</dd>
-                            <dt>Phonenumber</dt>
-                            <dd>{{ contacts.selectedPerson.phonenumber }}</dd>
-                            <dt>Address</dt>
-                            <dd>{{ contacts.selectedPerson.address }}</dd>
-                            <dt>City</dt>
-                            <dd>{{ contacts.selectedPerson.city }}</dd>
-                            <dt>Country</dt>
-                            <dd>{{ contacts.selectedPerson.country }}</dd>
-                        </dl>
-
+                        <form action=""
+                                    class="form-horizontal"
+                                    ng-submit="save()"
+                                    novalidate >
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                                 class="form-control"
+                                                 name="name"
+                                                 ng-model="contacts.selectedPerson.name"
+                                                 required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email"
+                                                 class="form-control"
+                                                 name="email"
+                                                 ng-model="contacts.selectedPerson.email"
+                                                 required />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Photo</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                                 class="form-control"
+                                                 name="photo"
+                                                 ng-model="contacts.selectedPerson.photo" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Sex</label>
+                                <div class="col-sm-10">
+                                    <select name="sex"
+                                                 class="form-control"
+                                                 ng-model="contacts.selectedPerson.sex"
+                                                 id="" >
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Birthday</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                                 name="birthday"
+                                                 class="form-control"
+                                                 ng-model="contacts.selectedPerson.birthdate"
+                                                 bs-datepicker />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="tel"
+                                                 class="form-control"
+                                                 name="phone"
+                                                 ng-model="contacts.selectedPerson.phonenumber" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">Address</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                                 class="form-control"
+                                                 name="address"
+                                                 ng-model="contacts.selectedPerson.address" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-2 control-label">City</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                                 class="form-control"
+                                                 name="city"
+                                                 ng-model="contacts.selectedPerson.city" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                            class="col-sm-2 control-label">Country</label>
+                                    <div class="col-sm-10">
+                                        <input type="text"
+                                                     name="country"
+                                                     class="form-control"
+                                                     ng-model="contacts.selectedPerson.country" />
+                                    </div>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-primary btn-block"
+                                                ladda="contacts.isSaving"
+                                                type="submit">Salve
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -123,6 +208,9 @@
     <script src="../libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
     <script src="../libs/spin.js/spin.js"></script>
     <script src="../libs/angular-spinner/angular-spinner.min.js"></script>
+    <script src="../libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="../libs/ladda/dist/ladda.min.js"></script>
+    <script src="../libs/angular-ladda/dist/angular-ladda.min.js"></script>
     <script src="main.js"></script>
 
 </body>

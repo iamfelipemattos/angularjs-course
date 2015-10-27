@@ -1,12 +1,17 @@
 var app = angular.module('application', [
     'ngResource',
     'infinite-scroll',
-    'angularSpinner'
+    'angularSpinner',
+    'jcs-autoValidate',
+    'angular-ladda'
 ]);
 
-app.config(function($httpProvider, $resourceProvider) {
+app.config(function($httpProvider, $resourceProvider, laddaProvider) {
     $httpProvider.defaults.headers.common['Authorization'] = 'Token 20002cd74d5ce124ae219e739e18956614aab490';
     $resourceProvider.defaults.stripTrailingSlashes = false;
+    laddaProvider.setOption({
+        style: 'expand-right'
+    });
 });
 
 app.factory('Contact', function ($resource) {
