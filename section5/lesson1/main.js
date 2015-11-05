@@ -47,11 +47,17 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
     };
 
     $scope.showCreateModal = function () {
+        $scope.contacts.selectedPerson = {};
         $scope.createModal = $modal({
             scope: $scope,
-            template: 'templates/modal.create.tpl.html',
+            template: 'templates/modal.html',
             show: true
         })
+    };
+
+    $scope.createContact = function () {
+        console.log("createContact");
+        $scope.contacts.createContact($scope.contacts.selectedPerson);
     };
 
     $scope.$watch('search', function (newVal, oldVal) {
@@ -138,6 +144,12 @@ app.service('ContactService', function (Contact) {
                 var index = self.persons.indexOf(person);
                 self.persons.splice(index, 1);
                 self.selectedPerson = null;
+            });
+        },
+        'createContact': function (person) {
+            self.isSaving = true;
+            Contact.save(person).$promise.then(function () {
+                self.isSaving = false;
             });
         }
     };
