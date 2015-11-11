@@ -71,7 +71,11 @@
                             <tr ng-repeat="person in contacts.persons"
                                 ng-style="{ 'background-color': person.email === contacts.selectedPerson.email ? 'lightgray' : '' }"
                                 ng-click="contacts.selectedPerson = person">
-                                <td>{{ $index + 1 }}</td>
+                                <td>
+                                    <img ng-src="{{ person.photo }}"
+                                               class="img-circle profile-photo"
+                                               alt="" />
+                                </td>
                                 <td>{{ person.name }}</td>
                                 <td>{{ person.email }}</td>
                                 <td>{{ person.birthdate | date:"longDate" }}</td>
