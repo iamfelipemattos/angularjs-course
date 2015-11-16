@@ -10,6 +10,8 @@
               rel="stylesheet">
     <link href="../libs/ladda/dist/ladda-themeless.min.css"
               rel="stylesheet">
+    <link href="../libs/font-awesome/css/font-awesome.min.css"
+              rel="stylesheet">
     <link href="main.css"
               rel="stylesheet">
 </head>
@@ -31,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form class="form-inline well well-sm">
-                            <span class="glyphicon glyphicon-search"></span>
+                            <span class="fa fa-search"></span>
 
                             <div class="form-group">
                                 <input type="text"
@@ -41,7 +43,7 @@
                                            placeholder="Search name..." />
                             </div>
 
-                            <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                            <span class="fa fa-sort"></span>
 
                             <div class="form-group">
                                 <select class="form-control" ng-model="order">
@@ -62,16 +64,23 @@
                                      infinite-scroll-distance="1">
 
                             <tr>
-                                <th>#</th>
-                                <th>Name
-                                    <span ng-click="order = 'name'" class="glyphicon glyphicon-menu-up"></span>
-                                    <span ng-click="order = '-name'" class="glyphicon glyphicon-menu-down"></span>
+                                <th class="col-1">#</th>
+                                <th class="col-2">
+                                    <div class="sortables">
+                                        <span ng-click="order = 'name'" class="fa fa-sort-asc"></span>
+                                        <span ng-click="order = '-name'" class="fa fa-sort-desc"></span>
+                                    </div>
+                                    Name
                                 </th>
-                                <th>Email
-                                    <span ng-click="order = 'email'" class="glyphicon glyphicon-menu-up"></span>
-                                    <span ng-click="order = '-email'"  class="glyphicon glyphicon-menu-down"></span>
+
+                                <th class="col-3">
+                                    <div class="sortables">
+                                        <span ng-click="order = 'email'" class="fa fa-sort-asc"></span>
+                                        <span ng-click="order = '-email'"  class="fa fa-sort-desc"></span>
+                                    </div>
+                                    Email
                                 </th>
-                                <th>Birthday</th>
+                                <th class="col-4">Birthday</th>
                             </tr>
 
                             <tr ng-repeat="person in contacts.persons"
