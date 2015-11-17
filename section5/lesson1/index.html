@@ -4,6 +4,8 @@
     <title>Contacts</title>
     <link href="../libs/bootstrap/dist/css/bootstrap.min.css"
               rel="stylesheet">
+    <link href="https://bootswatch.com/paper/bootstrap.min.css"
+              rel="stylesheet">
     <link href="../libs/bootstrap-additions/dist/bootstrap-additions.min.css"
               rel="stylesheet">
     <link href="../libs/angularjs-toaster/toaster.min.css"
@@ -80,7 +82,7 @@
                                     </div>
                                     Email
                                 </th>
-                                <th class="col-4">Birthday</th>
+                                <th class="col-4">Phone</th>
                             </tr>
 
                             <tr ng-repeat="person in contacts.persons"
@@ -93,7 +95,7 @@
                                 </td>
                                 <td>{{ person.name }}</td>
                                 <td>{{ person.email }}</td>
-                                <td>{{ person.birthdate | date:"longDate" }}</td>
+                                <td>{{ person.phonenumber }}</td>
                             </tr>
 
                         </table>

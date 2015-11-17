@@ -10,7 +10,7 @@ var app = angular.module('application', [
 ]);
 
 app.config(function($httpProvider, $resourceProvider, laddaProvider, $datepickerProvider) {
-    $httpProvider.defaults.headers.common['Authorization'] = 'Token 20002cd74d5ce124ae219e739e18956614aab490';
+    $httpProvider.defaults.headers.common['Authorization'] = 'Token 298eea76f7272377076fa26e10d378c5e89c7d0e';
     $resourceProvider.defaults.stripTrailingSlashes = false;
     laddaProvider.setOption({
         style: 'expand-right'

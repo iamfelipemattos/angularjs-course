@@ -25,15 +25,14 @@ body { padding-top: 50px; }
     .col-4 {
         width: 30%;
     }
-    tr {
-        td {
-            vertical-align: middle;
-            .profile-photo {
-                width: 30px;
-                height: 30px;
-            }
-        }
-    }
+}
+
+.table tr td {
+    vertical-align: middle;
+}
+.profile-photo {
+    width: 30px;
+    height: 30px;
 }
 .modal-backdrop.am-fade {
     opacity: .5;
