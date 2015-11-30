@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="application">
+<head>
+    <title>Contacts</title>
+    <link href="../../libs/bootstrap/dist/css/bootstrap.min.css"
+              rel="stylesheet">
+    <link href="https://bootswatch.com/paper/bootstrap.min.css"
+              rel="stylesheet">
+    <link href="../../libs/bootstrap-additions/dist/bootstrap-additions.min.css"
+              rel="stylesheet">
+    <link href="../../libs/angularjs-toaster/toaster.min.css"
+              rel="stylesheet">
+    <link href="../../libs/ladda/dist/ladda-themeless.min.css"
+              rel="stylesheet">
+    <link href="../../libs/font-awesome/css/font-awesome.min.css"
+              rel="stylesheet">
+    <link href="main.css"
+              rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">Contacts</a>
+          </div>
+      </div>
+  </nav>
+
+    <div class="container main-content">
+
+        <toaster-container ></toaster-container>
+
+        <div class="row">
+            <div class="col-md-8"  ng-controller="PersonListController">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline well well-sm">
+                            <span class="fa fa-search"></span>
+
+                            <div class="form-group">
+                                <input type="text"
+                                           class="form-control"
+                                           id="name"
+                                           ng-model="search"
+                                           placeholder="Search name..." />
+                            </div>
+
+                            <span class="fa fa-sort"></span>
+
+                            <div class="form-group">
+                                <select class="form-control" ng-model="order">
+                                    <option value="name">Name (ASC)</option>
+                                    <option value="-name">Name (DEC)</option>
+                                    <option value="email">Email (ASC)</option>
+                                    <option value="-email">Email (DEC)</option>
+                                </select>
+                            </div>
+
+                            <button class="btn btn-primary pull-right" ng-click="showCreateModal()">Create</button>
+
+                        </form>
+
+                        <table class="table table-bordered"
+                                     infinite-scroll="loadMore()"
+                                     infinite-scroll-immediate-check="false"
+                                     infinite-scroll-distance="1">
+
+                            <tr>
+                                <th class="col-1">#</th>
+                                <th class="col-2">
+                                    <div class="sortables">
+                                        <span ng-click="order = 'name'" class="fa fa-sort-asc"></span>
+                                        <span ng-click="order = '-name'" class="fa fa-sort-desc"></span>
+                                    </div>
+                                    Name
+                                </th>
+
+                                <th class="col-3">
+                                    <div class="sortables">
+                                        <span ng-click="order = 'email'" class="fa fa-sort-asc"></span>
+                                        <span ng-click="order = '-email'"  class="fa fa-sort-desc"></span>
+                                    </div>
+                                    Email
+                                </th>
+                                <th class="col-4">Phone</th>
+                            </tr>
+
+                            <tr ng-repeat="person in contacts.persons"
+                                ng-style="{ 'background-color': person.email === contacts.selectedPerson.email ? 'lightgray' : '' }"
+                                ng-click="contacts.selectedPerson = person">
+                                <td>
+                                    <img ng-src="{{ person.photo | defaultImage: './avatar.png' }}"
+                                               class="img-circle profile-photo"
+                                               alt="" />
+                                </td>
+                                <td>{{ person.name }}</td>
+                                <td>{{ person.email }}</td>
+                                <td>{{ person.phonenumber }}</td>
+                            </tr>
+
+                        </table>
+
+                        <div  ng-show="contacts.persons.length === 0 && !contacts.isLoading">
+                            <div class="alert alert-info">
+                                <p class="text-center">No results found for search term '{{ search }}'</p>
+                            </div>
+                        </div >
+
+                        <div class="spinner" ng-show="contacts.isLoading">
+                            <span us-spinner="{ radius: 8, width: 5, length: 3, lines: 9 }"></span>
+
+                            <p>Loading...</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4"  ng-controller="PersonDetailController">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Details
+
+                        <button class="btn btn-danger btn-sm pull-right"
+                                       ladda="contacts.isDeleting"
+                                       ng-click="remove()">Delete</button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <form  class="form-horizontal"
+                                    ng-submit="save()"
+                                    novalidate >
+
+                            <ng-include src="'templates/form.html'"></ng-include>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../libs/angular/angular.min.js"></script>
+    <script src="../../libs/angular-resource/angular-resource.min.js"></script>
+    <script src="../../libs/angular-animate/angular-animate.min.js"></script>
+    <script src="../../libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+    <script src="../../libs/spin.js/spin.js"></script>
+    <script src="../../libs/angular-spinner/angular-spinner.min.js"></script>
+    <script src="../../libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+    <script src="../../libs/ladda/dist/ladda.min.js"></script>
+    <script src="../../libs/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="../../libs/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="../../libs/angular-strap/dist/angular-strap.tpl.js"></script>
+    <script src="../../libs/angularjs-toaster/toaster.min.js"></script>
+    <script src="../../libs/ui-router/release/angular-ui-router.min.js"></script>
+    <script src="main.js"></script>
+
+</body>
+</html>

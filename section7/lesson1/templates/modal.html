@@ -1,0 +1,22 @@
+<div id="createModal"
+         class="modal"
+         role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"
+                               class="close"
+                               ng-click="createModal.hide()">&times;</button>
+                <h4 class="modal-title">Create Contact</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="createContact()"
+                            class="form-horizontal"
+                            novalidade>
+                    <ng-include src="'templates/form.html'"></ng-include>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
