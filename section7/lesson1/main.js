@@ -14,8 +14,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('list', {
             url: "/",
-            templateUrl: 'templates/list.html'
+            templateUrl: 'templates/list.html',
+            controller: 'PersonListController'
+        })
+        .state('edit', {
+            url: "/edit/:email",
+            templateUrl: 'templates/edit.html',
+            controller: 'PersonDetailController'
         });
+
     $urlRouterProvider.otherwise('/');
 });
 
@@ -44,23 +51,25 @@ app.filter('defaultImage', function () {
         console.log(input);
         console.log(param);
         if (!input) {
-            return param
+            return param;
         }
         return input;
     };
 
 });
 
-app.controller('PersonDetailController', function ($scope, ContactService) {
+app.controller('PersonDetailController', function ($scope, $stateParams, ContactService) {
+    console.log($stateParams);
+
     $scope.contacts = ContactService;
 
     $scope.save = function () {
-        $scope.contacts.updateContact($scope.contacts.selectedPerson)
+        $scope.contacts.updateContact($scope.contacts.selectedPerson);
     };
 
     $scope.remove = function () {
-        $scope.contacts.removeContact($scope.contacts.selectedPerson)
-    }
+        $scope.contacts.removeContact($scope.contacts.selectedPerson);
+    };
 });
 
 app.controller('PersonListController', function ($scope, $modal, ContactService) {
@@ -80,7 +89,7 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
             scope: $scope,
             template: 'templates/modal.html',
             show: true
-        })
+        });
     };
 
     $scope.createContact = function () {
@@ -88,7 +97,7 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
         $scope.contacts.createContact($scope.contacts.selectedPerson)
             .then(function () {
                 $scope.createModal.hide();
-            })
+            });
     };
 
     $scope.$watch('search', function (newVal, oldVal) {
@@ -101,7 +110,7 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
         if (angular.isDefined(newVal)) {
             $scope.contacts.doOrder(newVal);
         }
-    })
+    });
 
 });
 
@@ -191,7 +200,7 @@ app.service('ContactService', function (Contact, $q, toaster) {
                 self.persons = [];
                 self.loadContacts();
                 toaster.pop('success', 'Created ' + person.name);
-                d.resolve()
+                d.resolve();
             });
             return d.promise;
         }
