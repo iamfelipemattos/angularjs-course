@@ -18,7 +18,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'PersonListController'
         })
         .state('edit', {
-            url: "/edit/:email",
+            url: "/edit-this/:email",
             templateUrl: 'templates/edit.html',
             controller: 'PersonDetailController'
         });
@@ -62,6 +62,7 @@ app.controller('PersonDetailController', function ($scope, $stateParams, Contact
     console.log($stateParams);
 
     $scope.contacts = ContactService;
+    $scope.contacts.selectedPerson = $scope.contacts.getPerson($stateParams.email);
 
     $scope.save = function () {
         $scope.contacts.updateContact($scope.contacts.selectedPerson);
@@ -117,9 +118,15 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
 app.service('ContactService', function (Contact, $q, toaster) {
 
     var self = {
-        'addPerson': function (person) {
-            this.persons.push(person);
-        },
+       'getPerson': function (email) {
+            console.log(email);
+            for ( var i = 0; i < self.persons.length; i++ ) {
+                var obj = self.persons[i];
+                if ( obj.email === email ) {
+                    return obj;
+                }
+            }
+       },
         'page': 1,
         'hasMore': true,
         'isLoading': false,
