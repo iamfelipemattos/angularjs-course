@@ -18,10 +18,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'PersonListController'
         })
         .state('edit', {
-            url: "/edit-this/:email",
+            url: "/edit/:email",
+            templateUrl: 'templates/edit.html',
+            controller: 'PersonDetailController'
+        })
+        .state('create', {
+            url: "/create",
             templateUrl: 'templates/edit.html',
             controller: 'PersonDetailController'
         });
+
 
     $urlRouterProvider.otherwise('/');
 });
@@ -59,7 +65,7 @@ app.filter('defaultImage', function () {
 });
 
 app.controller('PersonDetailController', function ($scope, $stateParams, $state, ContactService) {
-    console.log($stateParams);
+    $scope.mode = "Edit";
 
     $scope.contacts = ContactService;
     $scope.contacts.selectedPerson = $scope.contacts.getPerson($stateParams.email);
@@ -76,6 +82,20 @@ app.controller('PersonDetailController', function ($scope, $stateParams, $state,
         });
     }
 });
+
+app.controller('PersonCreateController', function ($scope, $state, ContactService) {
+    $scope.mode = "Create";
+
+    $scope.contacts = ContactService;
+
+    $scope.save = function () {
+        console.log("createContact");
+        $scope.contacts.createContact($scope.contacts.selectedPerson)
+            .then(function () {
+                $state.go("list");
+            });
+    };
+})
 
 app.controller('PersonListController', function ($scope, $modal, ContactService) {
 
@@ -97,29 +117,9 @@ app.controller('PersonListController', function ($scope, $modal, ContactService)
         });
     };
 
-    $scope.createContact = function () {
-        console.log("createContact");
-        $scope.contacts.createContact($scope.contacts.selectedPerson)
-            .then(function () {
-                $scope.createModal.hide();
-            });
-    };
-
-    $scope.$watch('search', function (newVal, oldVal) {
-        if (angular.isDefined(newVal)) {
-            $scope.contacts.doSearch(newVal);
-        }
-    });
-
-    $scope.$watch('order', function (newVal, oldVal) {
-        if (angular.isDefined(newVal)) {
-            $scope.contacts.doOrder(newVal);
-        }
-    });
-
 });
 
-app.service('ContactService', function (Contact, $q, toaster) {
+app.service('ContactService', function (Contact, $rootScope, $q, toaster) {
 
     var self = {
        'getPerson': function (email) {
@@ -138,18 +138,17 @@ app.service('ContactService', function (Contact, $q, toaster) {
         'selectedPerson': null,
         'persons': [],
         'search': null,
-        'doSearch': function (search) {
+        'ordering': 'name',
+        'doSearch': function () {
             self.hasMore = true;
             self.page = 1;
             self.persons = [];
-            self.search = search;
             self.loadContacts();
         },
-        'doOrder': function (order) {
+        'doOrder': function () {
             self.hasMore = true;
             self.page = 1;
             self.persons = [];
-            self.ordering = order;
             self.loadContacts();
         },
         'loadContacts': function () {
@@ -219,11 +218,28 @@ app.service('ContactService', function (Contact, $q, toaster) {
                 d.resolve();
             });
             return d.promise;
-        }
+        },
+        'watchFilters': function () {
+            $rootScope.$watch(function () {
+                return self.search;
+            }, function (newVal) {
+                if (angular.isDefined(newVal)) {
+                    self.doSearch();
+                }
+            });
 
+            $rootScope.$watch(function () {
+                return self.ordering;
+            }, function (newVal) {
+                if (angular.isDefined(newVal)) {
+                    self.doOrder();
+                }
+            });
+        }
     };
 
     self.loadContacts();
+    self.watchFilters();
 
     return self;
 

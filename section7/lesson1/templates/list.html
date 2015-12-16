@@ -8,14 +8,14 @@
                     <input type="text"
                            class="form-control"
                            id="name"
-                           ng-model="search"
+                           ng-model="contacts.search"
                            placeholder="Search name..." />
                 </div>
 
                 <span class="fa fa-sort"></span>
 
                 <div class="form-group">
-                    <select class="form-control" ng-model="order">
+                    <select class="form-control" ng-model="contacts.ordering">
                         <option value="name">Name (ASC)</option>
                         <option value="-name">Name (DEC)</option>
                         <option value="email">Email (ASC)</option>
