@@ -124,7 +124,8 @@ app.service('ContactService', function (Contact, $rootScope, $q, toaster) {
     var self = {
        'getPerson': function (email) {
             console.log(email);
-            for ( var i = 0; i < self.persons.length; i++ ) {
+            lengthPersons = self.persons.length;
+            for ( var i = 0; i < lengthPersons; i++ ) {
                 var obj = self.persons[i];
                 if ( obj.email === email ) {
                     return obj;
