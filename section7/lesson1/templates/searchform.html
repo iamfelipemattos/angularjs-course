@@ -4,6 +4,7 @@
                class="form-control"
                id="name"
                ng-model="contacts.search"
+               ng-model-options="{ debounce: 300 }"
                placeholder="Search name..." />
     </div>
 
