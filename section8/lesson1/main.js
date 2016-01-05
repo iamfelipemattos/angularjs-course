@@ -78,8 +78,10 @@ app.factory("Contact", function ($resource) {
     });
 });
 
-app.directive('spinner', function () {
+app.directive('ccSpinner', function () {
     return {
+        'transclude': true,
+        'restrict': 'AE',
         'templateUrl': 'templates/spinner.html'
     }
 });
