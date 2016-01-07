@@ -1,8 +1,16 @@
 <div class="col-md-12">
     <div class="row">
         <div class="col-md-12">
+            <div class="row"
+                     infinite-scroll="loadMore()"
+                     infinite-scroll-immediate-check="false"
+                     infinite-scroll-distance="1">
 
-            <table class="table table-bordered"
+                     <cc-card ng-repeat="person in contacts.persons"
+                                     user="person">
+                     </cc-card>
+            </div>
+            <!-- <table class="table table-bordered"
                    infinite-scroll="loadMore()"
                    infinite-scroll-immediate-check="false"
                    infinite-scroll-distance="1">
@@ -40,7 +48,7 @@
                     <td>{{ person.phonenumber }}</td>
                 </tr>
 
-            </table>
+            </table> -->
 
             <div  ng-show="contacts.persons.length === 0 && !contacts.isLoading">
                 <div class="alert alert-info">
