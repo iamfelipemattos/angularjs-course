@@ -9,7 +9,7 @@
             <div class="col-md-8">
                 <h4>{{ user.name }}
                     <i class="fa"
-                         ng-class="{ 'fa-female': user.sex === 'F', 'fa-male: user.sex === 'M" }></i>
+                         ng-class="{ 'fa-female': user.sex === 'F', 'fa-male': user.sex === 'M' }"></i>
                 </h4>
                 <small>{{ user.city }}, {{ user.country }}
                     <i class="fa fa-map-marker"></i>
@@ -27,6 +27,13 @@
                               ui-sref="edit({ email: user.email })">
                     <i class="fa fa-pencil"></i>&nbsp;Edit
                 </button>
+
+                <button type="button"
+                              class="btn btn-default btn-sm"
+                              ng-click="deleteUser()(user)">
+                    <i class="fa fa-trash"></i>&nbsp;Delete
+                </button>
+
             </div>
         </div>
     </div>
