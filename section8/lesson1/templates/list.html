@@ -7,7 +7,8 @@
                      infinite-scroll-distance="1">
 
                      <cc-card ng-repeat="person in contacts.persons"
-                                     user="person">
+                                     user="person"
+                                     delete-user="parentDeleteUser">
                      </cc-card>
             </div>
             <!-- <table class="table table-bordered"
